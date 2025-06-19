@@ -1,9 +1,14 @@
 
 <p *ngIf="dataLoading()">Loading...</p>
+
+<form>
+    <label>Filter Todo's</label>
+    <input name="searchTerm" type="text" [(ngModel)] = "searchTerm" placeholder="Type to filter todos" />
+</form>
 <div *ngIf="!dataLoading()">
     <h2>Todo List</h2>
     <p *ngIf="!todoItems().length">No todos available.</p>
-    @for(todo of todoItems(); track $index){
+    @for(todo of todoItems() | filterTodos : searchTerm(); track $index){
         <app-todo-item [todo] = "todo" />
     }
 </div>
