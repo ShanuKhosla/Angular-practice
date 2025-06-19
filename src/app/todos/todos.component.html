@@ -1,1 +1,9 @@
-<p>todos works!</p>
+
+<p *ngIf="dataLoading()">Loading...</p>
+<div *ngIf="!dataLoading()">
+    <h2>Todo List</h2>
+    <p *ngIf="!todoItems().length">No todos available.</p>
+    @for(todo of todoItems(); track $index){
+        <app-todo-item [todo] = "todo" />
+    }
+</div>

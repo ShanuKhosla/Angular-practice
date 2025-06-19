@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Todo } from '../model/todo.type';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodosService {
+  http = inject(HttpClient);
   todoItems: Array<Todo> = [{
     userId: 1,
     completed: false,
@@ -27,5 +29,9 @@ export class TodosService {
     description: 'This is another todo item with a description.'
   }
 ]
+
+  getTodosFromApi(){
+    return this.http.get<Array<Todo>>("https://jsonplaceholder.typicode.com/todos");
+  }
   constructor() { }
 }
